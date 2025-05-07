@@ -80,7 +80,7 @@ export const logout = (req, res) => {
       message: "User logged out Successfully",
     });
   } catch (error) {
-    console.log("Error in login controller", error.message);
+    console.log("Error in logout controller", error.message);
     return res.status(500).json({ message: "INTERNAL SERVER ERROR" });
   }
 };
@@ -105,7 +105,7 @@ export const updateProfile = async (req, res) => {
     );
     res.status(201).json(updateUser);
   } catch (error) {
-    console.log("Error in login controller", error.message);
+    console.log("Error in updating profile", error.message);
     return res.status(500).json({ message: "INTERNAL SERVER ERROR" });
   }
 };
@@ -115,7 +115,7 @@ export const checkAuth = async (req,res) => {
   try {
     res.status(201).json(req.user);
   } catch (error) {
-    console.log("Error in login controller", error.message);
+    console.log("Error in checkAuth controller", error.message);
     return res.status(500).json({ message: "INTERNAL SERVER ERROR..." });
   }
 
