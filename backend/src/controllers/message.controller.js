@@ -51,12 +51,24 @@ export const sendMessage = async (req, res) => {
     const { id: receiverId } = req.params;
 
     const senderId = req.user._id;
-
-    let imageUrl;
+    let files = []
     if (req.file) {
+      let resource_type = "auto";
+      const mime = req.file.mimetype;
+
       try {
-        const uploadResponse = await cloudinary.uploader.upload(req.file.path);
-        imageUrl = uploadResponse.secure_url;
+        if (
+          mime === "application/pdf" ||
+          mime === "application/vnd.ms-powerpoint" ||
+          mime ===
+            "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+        ) {
+          resource_type = "raw"; // PDFs and presentations need this
+        }
+        const result = await cloudinary.uploader.upload(req.file.path, {
+          resource_type: resource_type,
+        });
+        files = [result.secure_url];
       } catch (error) {
         console.log("Error uploading to Cloudinary:", error.message);
         return res.status(500).json({ message: "Error uploading image" });
@@ -67,7 +79,7 @@ export const sendMessage = async (req, res) => {
       senderId,
       receiverId,
       text,
-      image: imageUrl || "",
+      files: files || [],
     });
     await newMessage.save();
     res.status(201).json(newMessage);

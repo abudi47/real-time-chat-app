@@ -14,7 +14,7 @@ router.get("/users", authenticated, getSideBarUsers);
 router.post(
   "/sendMessage/:id",
   authenticated,
-  Upload.single("image"),
+  Upload.single("files"),
   sendMessage
 );
 router.get("/getMessages/:id", authenticated, getMessages);
