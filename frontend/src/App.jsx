@@ -1,25 +1,52 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Navbar from "./components/Navbar";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import HomePage from "./pages/HomePage.jsx";
-import LogIn from "./pages/LogIn.jsx"
-import Profile from "./pages/Profile.jsx"
-import Settings from "./pages/Settings.jsx"
+import LogIn from "./pages/LogIn.jsx";
+import Profile from "./pages/Profile.jsx";
+import Settings from "./pages/Settings.jsx";
 import SignUp from "./pages/SignUp.jsx";
+import { useAuthStore } from "./store/useAuthStore.js";
+import { Loader } from "lucide-react";
 
 export default function App() {
-  return (
-   <div>
-    <Navbar />  
-    <Routes>
-      <Route path="/" element={<HomePage />}/>
-      <Route path="/signUp" element={<SignUp />}/>
-      <Route path="/login" element={<LogIn />}/>
-      <Route path="/settings" element={<Settings />}/>
-      <Route path="/profile" element={<Profile />}/>
+  const { checkAuth, authUser, isCheckingAuth } = useAuthStore();
 
-    </Routes>
-      
-  </div>
+  useEffect(() => {
+    checkAuth();
+  }, [checkAuth]);
+
+  console.log({ authUser });
+
+  if (isCheckingAuth && !authUser) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <Loader className="size-10 animate-spin" />
+      </div>
+    );
+  }
+  return (
+    <div>
+      <Navbar />
+      <Routes>
+        <Route
+          path="/"
+          element={authUser ? <HomePage /> : <Navigate to="/login" />}
+        />
+        <Route
+          path="/signUp"
+          element={!authUser ? <SignUp /> : <Navigate to="/" />}
+        />
+        <Route
+          path="/login"
+          element={!authUser ? <LogIn /> : <Navigate to="/" />}
+        />
+        <Route path="/settings" element={<Settings />} />
+        <Route
+          path="/profile"
+          element={authUser ? <Profile /> : <Navigate to="/login" />}
+        />
+      </Routes>
+    </div>
   );
 }
