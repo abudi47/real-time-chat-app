@@ -67,6 +67,7 @@ export const sendMessage = async (req, res) => {
         }
         const result = await cloudinary.uploader.upload(req.file.path, {
           resource_type: resource_type,
+          folder: "real-chat",
         });
         files = [result.secure_url];
       } catch (error) {

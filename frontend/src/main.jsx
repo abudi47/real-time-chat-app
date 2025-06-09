@@ -1,3 +1,5 @@
+import React from 'react'; // ✅ Required for JSX (unless using new JSX transform in modern setups)
+
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
