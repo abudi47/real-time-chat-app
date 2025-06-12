@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import AuthImagePattern from "../components/AuthImagePattern";
+import toast from "react-hot-toast";
 
 export default function SignUp() {
   const [showPassword, setShowPassword] = useState(false);
@@ -23,17 +24,28 @@ export default function SignUp() {
   });
   console.log("form dataaaaaaa", formData);
   const { signup, isSigningUp } = useAuthStore();
+  const validation = () => {
+    if (!formData.fullName.trim())
+      return toast.error("Full name is required ...");
+    if (!formData.email.trim()) return toast.error("Email is required ...");
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email))
+      return toast.error("Please enter a valid email address ...");
 
+    if (!formData.password.trim())
+      return toast.error("Password  is required ...");
+
+    return true;
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // const success = validateForm();
+    const success = validation();
 
-    // if (success === true) signup(formData);
+    if (success === true) signup(formData);
   };
   return (
     <div className="min-h-screen grid lg:grid-cols-2">
-    
       <div className="flex flex-col justify-center items-center p-6 sm:p-12">
         <div className="w-full max-w-md space-y-8">
           {/* LOGO */}
