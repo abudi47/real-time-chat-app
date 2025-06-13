@@ -50,9 +50,24 @@ export const useAuthStore = create((set) => ({
     try {
       await api.post("/auth/logout");
       set({ authUser: null });
-      toast.success("user logged out successfully")
+      toast.success("user logged out successfully");
     } catch (error) {
       toast.error(error.response.data.message);
+    }
+  },
+
+  updateProfile: async (data) => {
+    try {
+      set({ isUpdatingProfile: true });
+      const { authUser } = useAuthStore.getState(); // get the current user
+
+      const res = await api.put(`/auth/updateProfile/${authUser._id}`, data);
+      set({ authUser: res.data });
+      toast.success("profile updated successfully");
+    } catch (error) {
+      toast.error(error.response?.data?.message || "Update failed");
+    } finally {
+      set({ isUpdatingProfile: false });
     }
   },
 }));

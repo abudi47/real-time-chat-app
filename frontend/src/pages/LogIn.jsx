@@ -50,12 +50,12 @@ export default function LogIn() {
             <div className="flex flex-col items-center gap-2 group">
               <div
                 className="size-12 rounded-xl bg-primary/10 flex items-center justify-center 
-                  group-hover:bg-primary/20 transition-colors"
+                  group-hover:bg-primary/20 transition-colors hover:scale-110"
               >
                 <MessageSquare className="size-8 text-primary" />
               </div>
-              <h1 className="text-2xl font-bold mt-2">Sign-in</h1>
-              <p className="text-base-content/60"></p>
+              <h1 className="text-3xl font-bold mt-2">Welcome Back</h1>
+              <p className="text-slate-400 text-">sign in to your account</p>
             </div>
           </div>
 
@@ -127,9 +127,9 @@ export default function LogIn() {
             </button>
           </form>
           <div className="text-center">
-            <p className="text-base-content/60">
+            <p className="text-slate-300">
               Don't you have an account?{" "}
-              <Link to="/signup" className="link link-primary">
+              <Link to="/signup" className="text-blue-600 hover:underline">
                 Sign up
               </Link>
             </p>

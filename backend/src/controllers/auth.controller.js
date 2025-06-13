@@ -89,25 +89,27 @@ export const logout = (req, res) => {
 
 export const updateProfile = async (req, res) => {
   try {
-    
+    const { fullName, email } = req.body;
 
-    
-    if (!req.file) {
-      return res.status(400).json({
-        message: "profile pic is required",
-      });
-    }
+    let updateData = {};
+
     const userId = req.user._id;
-    console.log("Uploaded File:", req.file);
-    console.log("File Path for Upload:", req.file.path);
-    const uploadResoponse = await cloudinary.uploader.upload(req.file.path, {
-      folder: "profile-pictures",
+    if (req.file) {
+      const uploadResoponse = await cloudinary.uploader.upload(req.file.path, {
+        folder: "profile-pictures",
+      });
+      updateData.profilePic = uploadResoponse.secure_url;
+    }
+    if (fullName) updateData.fullName = fullName;
+    if (email) updateData.email = email;
+
+    if (Object.keys(updateData).length === 0) {
+      return res.status(400).json({ message: "No data to update" });
+    }
+
+    const updateUser = await User.findByIdAndUpdate(userId, updateData, {
+      new: true,
     });
-    const updateUser = await User.findByIdAndUpdate(
-      userId,
-      { profilePic: uploadResoponse.secure_url },
-      { new: true }
-    );
     res.status(201).json(updateUser);
   } catch (error) {
     console.log("Error in updating profile", error);
@@ -115,13 +117,11 @@ export const updateProfile = async (req, res) => {
   }
 };
 
-
-export const checkAuth = async (req,res) => {
+export const checkAuth = async (req, res) => {
   try {
     res.status(201).json(req.user);
   } catch (error) {
     console.log("Error in checkAuth controller", error.message);
     return res.status(500).json({ message: "INTERNAL SERVER ERROR..." });
   }
-
-}
+};
