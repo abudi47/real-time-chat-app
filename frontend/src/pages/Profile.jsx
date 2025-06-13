@@ -1,5 +1,5 @@
-import { Loader2, Mail, User } from "lucide-react";
-import React, { useState } from "react";
+import { Camera, Loader2, Mail, User } from "lucide-react";
+import React, { useEffect, useState } from "react";
 import { useAuthStore } from "../store/useAuthStore.js";
 export default function Profile() {
   const [formData, setFormData] = useState({
@@ -7,12 +7,36 @@ export default function Profile() {
     email: "",
   });
 
-  const { isUpdatingProfile, updateProfile } = useAuthStore();
+  const { isUpdatingProfile, updateProfile, authUser } = useAuthStore();
+  const [selectedImg, setSelectedImg] = useState(null);
 
+  useEffect(() => {
+    if (authUser) {
+      setFormData({
+        fullName: authUser.fullName || "",
+        email: authUser.email || "",
+      });
+    }
+  }, [authUser]);
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    console.log("file", file);
+    if (!file) return;
+    const reader = new FileReader();
+
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      const base6rimg = reader.result;
+      setSelectedImg(base6rimg);
+    };
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    updateProfile(formData);
+    const dataToUpdate = {
+      ...formData, 
+      ...(selectedImg && {profilePic : selectedImg})
+    }
+    updateProfile(dataToUpdate);
   };
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-base-100 mt-12 space-y-4">
@@ -20,12 +44,42 @@ export default function Profile() {
         <h1 className="text-xl m-4 text-white">Profile</h1>
         <p className="">Your profile information</p>
 
-        <img
-          src="https://images.unsplash.com/photo-1594751543129-6701ad444259?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZGFyayUyMHByb2ZpbGV8ZW58MHx8MHx8fDA%3D"
-          alt="profile-pic"
-          className="w-32 h-32 rounded-full"
-        />
-        <p>click the camera icon to update your photo</p>
+        <div className="flex flex-col items-center gap-4">
+          <div className="relative">
+            <img
+              src={selectedImg || authUser.profilePic || "/avatar.png"}
+              alt="Profile"
+              className="size-32 rounded-full object-cover border-4 "
+            />
+            <label
+              htmlFor="avatar-upload"
+              className={`
+                  absolute bottom-0 right-0 
+                  bg-base-content hover:scale-105
+                  p-2 rounded-full cursor-pointer 
+                  transition-all duration-200
+                  ${
+                    isUpdatingProfile ? "animate-pulse pointer-events-none" : ""
+                  }
+                `}
+            >
+              <Camera className="w-5 h-5 text-base-200" />
+              <input
+                type="file"
+                id="avatar-upload"
+                className="hidden"
+                accept="image/*"
+                onChange={handleImageUpload}
+                disabled={isUpdatingProfile}
+              />
+            </label>
+          </div>
+          <p className="text-sm text-zinc-400">
+            {isUpdatingProfile
+              ? "Uploading..."
+              : "Click the camera icon to update your photo"}
+          </p>
+        </div>
         <form onSubmit={handleSubmit} className="w-full space-y-6">
           <div className="form-control w-full">
             <label className="label">
