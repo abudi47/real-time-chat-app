@@ -7,6 +7,7 @@ export const useAuthStore = create((set) => ({
   isLoggingin: false,
   isUpdatingProfile: false,
   isCheckingAuth: true,
+  uploadProgress: null,
 
   checkAuth: async () => {
     try {
@@ -61,7 +62,15 @@ export const useAuthStore = create((set) => ({
       set({ isUpdatingProfile: true });
       const { authUser } = useAuthStore.getState(); // get the current user
 
-      const res = await api.put(`/auth/updateProfile/${authUser._id}`, data);
+      const res = await api.put(`/auth/updateProfile/${authUser._id}`, data, {
+        headers: { "Content-Type": "multipart/form-data" },
+        onUploadProgress: (progressEvent) => {
+          const percent = Math.round(
+            (progressEvent.loaded * 100) / progressEvent.total
+          );
+          set({ uploadProgress: percent });
+        },
+      });
       set({ authUser: res.data });
       toast.success("profile updated successfully");
     } catch (error) {
