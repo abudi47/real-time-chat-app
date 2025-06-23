@@ -55,7 +55,7 @@ export default function LogIn() {
                 <MessageSquare className="size-8 text-primary" />
               </div>
               <h1 className="text-3xl font-bold mt-2">Welcome Back</h1>
-              <p className="text-slate-400 text-">sign in to your account</p>
+              <p className="text-base-content/60 ">sign in to your account</p>
             </div>
           </div>
 
@@ -127,9 +127,9 @@ export default function LogIn() {
             </button>
           </form>
           <div className="text-center">
-            <p className="text-slate-300">
+            <p className="text-base-content/60">
               Don't you have an account?{" "}
-              <Link to="/signup" className="text-blue-600 hover:underline">
+              <Link to="/signup" className="text-primary hover:underline">
                 Sign up
               </Link>
             </p>

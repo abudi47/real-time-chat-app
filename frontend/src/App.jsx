@@ -7,27 +7,29 @@ import Profile from "./pages/Profile.jsx";
 import Settings from "./pages/Settings.jsx";
 import SignUp from "./pages/SignUp.jsx";
 import { useAuthStore } from "./store/useAuthStore.js";
+import { useThemeStore } from "./store/useThemeStore.js";
 import { Loader } from "lucide-react";
 import { Toaster } from "react-hot-toast";
-
 export default function App() {
   const { checkAuth, authUser, isCheckingAuth } = useAuthStore();
-
+  const { theme } = useThemeStore();
   useEffect(() => {
     checkAuth();
   }, [checkAuth]);
-
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+  }, [theme]);
   console.log({ authUser });
 
   if (isCheckingAuth && !authUser) {
     return (
       <div className="flex items-center justify-center h-screen">
-        <Loader className="size-11 animate-spin" /> 
+        <Loader className="size-11 animate-spin" />
       </div>
     );
   }
   return (
-    <div>
+    <div data-theme={theme} className="min-h-screen">
       <Navbar />
       <Routes>
         <Route
@@ -36,7 +38,7 @@ export default function App() {
         />
         <Route
           path="/signup"
-          element={!authUser ? <SignUp /> : <Navigate to="/" />} 
+          element={!authUser ? <SignUp /> : <Navigate to="/" />}
         />
         <Route
           path="/login"
