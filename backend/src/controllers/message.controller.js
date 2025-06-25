@@ -28,7 +28,11 @@ export const getMessages = async (req, res) => {
   try {
     const { id: usrToChatId } = req.params;
     const myId = req.user._id;
-
+    // Validation
+    if (!myId || !usrToChatId) {
+      console.log("Missing myId or usrToChatId", { myId, usrToChatId });
+      return res.status(400).json({ message: "Invalid user or chat id" });
+    }
     const messages = await Message.find({
       $or: [
         { senderId: myId, receiverId: usrToChatId },
@@ -51,7 +55,7 @@ export const sendMessage = async (req, res) => {
     const { id: receiverId } = req.params;
 
     const senderId = req.user._id;
-    let files = []
+    let files = [];
     if (req.file) {
       let resource_type = "auto";
       const mime = req.file.mimetype;

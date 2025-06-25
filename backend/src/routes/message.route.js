@@ -17,6 +17,6 @@ router.post(
   Upload.single("files"),
   sendMessage
 );
-router.get("/getMessages/:id", authenticated, getMessages);
+router.get("/:id", authenticated, getMessages);
 
 export default router;
