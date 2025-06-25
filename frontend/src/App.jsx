@@ -29,27 +29,27 @@ export default function App() {
     );
   }
   return (
-    <div data-theme={theme} className="min-h-screen">
+    <div data-theme={theme}>
       <Navbar />
-      <Routes>
-        <Route
-          path="/"
-          element={authUser ? <HomePage /> : <Navigate to="/login" />}
-        />
-        <Route
-          path="/signup"
-          element={!authUser ? <SignUp /> : <Navigate to="/" />}
-        />
-        <Route
-          path="/login"
-          element={!authUser ? <LogIn /> : <Navigate to="/" />}
-        />
-        <Route path="/settings" element={<Settings />} />
-        <Route
-          path="/profile"
-          element={authUser ? <Profile /> : <Navigate to="/login" />}
-        />
-      </Routes>
+        <Routes>
+          <Route
+            path="/"
+            element={authUser ? <HomePage /> : <Navigate to="/login" />}
+          />
+          <Route
+            path="/signup"
+            element={!authUser ? <SignUp /> : <Navigate to="/" />}
+          />
+          <Route
+            path="/login"
+            element={!authUser ? <LogIn /> : <Navigate to="/" />}
+          />
+          <Route path="/settings" element={<Settings />} />
+          <Route
+            path="/profile"
+            element={authUser ? <Profile /> : <Navigate to="/login" />}
+          />
+        </Routes>
 
       <Toaster />
     </div>
