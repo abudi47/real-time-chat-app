@@ -3,44 +3,56 @@ import React, { useRef, useState } from "react";
 import toast from "react-hot-toast";
 import { useChatStore } from "../store/useChatStore";
 export default function MessageInput() {
-  const [text, setText] = useState("");
+  //   const [text, setText] = useState("");
   const [imagePrieview, setImagePrieveiw] = useState(null);
+  const [formData, setFormData] = useState({
+    text: "",
+    image: null,
+  });
+
   const { sendMessage } = useChatStore();
 
   const fileInputRef = useRef(null);
   const handleImageChange = (e) => {
     const file = e.target.files[0];
-    if (!file.type.startsWith("image/")) {
-      toast.error("Please select an imiage file ");
+    if (!file?.type?.startsWith("image/")) {
+      toast.error("Please select an image file");
       return;
     }
 
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      setImagePrieveiw(reader.result);
-    };
-    reader.readAsDataURL(file);
+    setFormData((prev) => ({ ...prev, image: file }));
+    setImagePrieveiw(URL.createObjectURL(file));
+
+    // const reader = new FileReader();
+    // reader.onloadend = () => {
+    //   setImagePrieveiw(reader.result);
+    // };
+    // reader.readAsDataURL(file);
   };
 
   const removeImage = () => {
     setImagePrieveiw(null);
+    setFormData((prev) => ({ ...prev, image: null }));
+
     if (fileInputRef.current) fileInputRef.current.value = "";
   };
   const handleSendMessage = async (e) => {
     e.preventDefault();
-    if (!text.trim() && !imagePrieview) return;
-
+    // if (!text.trim() && !imagePrieview) return;
     try {
-      await sendMessage({
-        text: text.trim(),
-        image: imagePrieview,
-      });
-      setText("");
+      let payload = formData;
+      if (formData.image) {
+        payload = new window.FormData();
+        payload.append("text", formData.text);
+        payload.append("files", formData.image);
+      }
+      await sendMessage(payload);
+      setFormData({ text: "", image: null });
       setImagePrieveiw(null);
       if (fileInputRef.current) fileInputRef.current.value = "";
     } catch (error) {
-      toast.error("error while sending the message");
-      console.log(error.message)
+      toast.error("Error while sending the message");
+      console.log(error.message);
     }
   };
 
@@ -72,8 +84,10 @@ export default function MessageInput() {
             type="text"
             className="w-full input input-bordered rounded-lg input-sm sm:input-md"
             placeholder="Type a message..."
-            value={text}
-            onChange={(e) => setText(e.target.value)}
+            value={formData.text}
+            onChange={(e) =>
+              setFormData((prev) => ({ ...prev, text: e.target.value }))
+            }
           />
           <input
             type="file"
@@ -94,7 +108,7 @@ export default function MessageInput() {
         <button
           type="submit"
           className="btn btn-sm btn-circle"
-          disabled={!text.trim() && !imagePrieview}
+          disabled={!formData.text.trim() && !formData.image}
         >
           <Send size={22} />
         </button>

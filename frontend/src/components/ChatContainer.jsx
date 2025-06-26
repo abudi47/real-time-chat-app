@@ -13,7 +13,7 @@ export default function ChatContainer() {
     }
   }, [selectedUser?._id, getMessage]);
 
-  if (true) {
+  if (isMessageLoading) {
     return (
       <div className="flex-1 flex flex-col overflow-auto">
         <ChatHeader />
@@ -26,6 +26,10 @@ export default function ChatContainer() {
   return (
     <div className="flex-1 flex flex-col overflow-auto">
       <ChatHeader />
+
+      <p>message ....</p>
+
+      <MessageInput />
     </div>
   );
 }
