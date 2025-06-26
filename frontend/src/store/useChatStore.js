@@ -35,9 +35,14 @@ export const useChatStore = create((set, get) => ({
   sendMessage: async (messageData) => {
     const { selectedUser, messages } = get();
     try {
+      let config = {};
+      if (messageData instanceof FormData) {
+        config.headers = { "Content-Type": "multipart/form-data" };
+      }
       const res = await api.post(
         `/message/sendMessage/${selectedUser._id}`,
-        messageData
+        messageData,
+        config
       );
       set({ messages: [...messages, res.data] });
     } catch (error) {
