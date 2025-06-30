@@ -11,7 +11,7 @@ import { useThemeStore } from "./store/useThemeStore.js";
 import { Loader } from "lucide-react";
 import { Toaster } from "react-hot-toast";
 export default function App() {
-  const { checkAuth, authUser, isCheckingAuth } = useAuthStore();
+  const { checkAuth, authUser, isCheckingAuth, onlineUsers } = useAuthStore();
   const { theme } = useThemeStore();
   useEffect(() => {
     checkAuth();
@@ -20,7 +20,8 @@ export default function App() {
     document.documentElement.setAttribute("data-theme", theme);
   }, [theme]);
   console.log({ authUser });
-
+  console.log("onlineuser", {onlineUsers});
+  
   if (isCheckingAuth && !authUser) {
     return (
       <div className="flex items-center justify-center h-screen">
