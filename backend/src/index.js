@@ -7,7 +7,6 @@ import messageRoutes from "./routes/message.route.js";
 import { connectDb } from "./lib/db.js";
 import { app, server } from "./lib/socket.js";
 import path from "path";
-import index from "../../";
 dotenv.config();
 
 const PORT = process.env.PORT;
