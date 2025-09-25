@@ -98,10 +98,4 @@ A modern, full-stack real-time chat application built with React, Node.js, and S
 5. **Online Status**: See green dots next to online users
 6. **Themes**: Change themes in Settings
 
-## 🤝 Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-## 📄 License
-
-This project is licensed under the MIT License.
