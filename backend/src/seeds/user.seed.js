@@ -7,96 +7,70 @@ config();
 const seedUsers = [
   // Female Users
   {
-    email: "emma.thompson@example.com",
-    fullName: "Emma Thompson",
-    password: "123456",
-    profilePic: "https://randomuser.me/api/portraits/women/1.jpg",
+    email: "abduselamT@gmail.com",
+    fullName: "abduselamT",
+    password: "abduselamT",
+    profilePic:
+      "https://portal.astu.edu.et/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBN2VtQWc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--92921af63427c1b8ac35c9365f8809ef2197abc4/1716708330046.jpg",
   },
   {
-    email: "olivia.miller@example.com",
-    fullName: "Olivia Miller",
-    password: "123456",
-    profilePic: "https://randomuser.me/api/portraits/women/2.jpg",
+    email: "abduselamM@gmail.com",
+    fullName: "abduselamM",
+    password: "abduselamM",
+    profilePic:
+      "https://portal.astu.edu.et/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBd2paQWc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--c8421251acea9474804b17f2db3847b54115b80d/IMG_8168.JPG",
   },
   {
-    email: "sophia.davis@example.com",
-    fullName: "Sophia Davis",
-    password: "123456",
-    profilePic: "https://randomuser.me/api/portraits/women/3.jpg",
+    email: "biniyam@gmail.com",
+    fullName: "biniyam",
+    password: "biniyam",
+    profilePic:
+      "https://portal.astu.edu.et/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBOFc1QWc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--8eca8b1f487c710e2e22facf84c1421487c7b075/IMG_20241018_012126_097.jpg",
+  },
+
+  {
+    email: "abdurahman@gmail.com",
+    fullName: "abdurahman",
+    password: "abdurahman",
+    profilePic:
+      "https://portal.astu.edu.et/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBNGE2QWc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--fc3c8ece2b066055fb563cf549cff1ce736f8526/IMG_20241026_214856_961.webp",
   },
   {
-    email: "ava.wilson@example.com",
-    fullName: "Ava Wilson",
-    password: "123456",
-    profilePic: "https://randomuser.me/api/portraits/women/4.jpg",
+    email: "abuzer@gmail.com",
+    fullName: "abuzer",
+    password: "abuzer",
+    profilePic:
+      "https://portal.astu.edu.et/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBem8vQWc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--ce42b55d33a8e3842d14c85556766478490f642a/5G5A4593.jpg",
   },
   {
-    email: "isabella.brown@example.com",
-    fullName: "Isabella Brown",
-    password: "123456",
-    profilePic: "https://randomuser.me/api/portraits/women/5.jpg",
+    email: "abyalew@gmail.com",
+    fullName: "abyalew",
+    password: "abyalew",
+    profilePic:
+      "https://portal.astu.edu.et/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBeUEvQWc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--b187e5ec539b8c197ebeb2247528aa6ace0d5a23/abi.jpg",
   },
   {
-    email: "mia.johnson@example.com",
-    fullName: "Mia Johnson",
-    password: "123456",
-    profilePic: "https://randomuser.me/api/portraits/women/6.jpg",
-  },
-  {
-    email: "charlotte.williams@example.com",
-    fullName: "Charlotte Williams",
-    password: "123456",
-    profilePic: "https://randomuser.me/api/portraits/women/7.jpg",
-  },
-  {
-    email: "amelia.garcia@example.com",
-    fullName: "Amelia Garcia",
-    password: "123456",
-    profilePic: "https://randomuser.me/api/portraits/women/8.jpg",
+    email: "aman@gmail.com",
+    fullName: "aman",
+    password: "aman",
+    profilePic:
+      "https://portal.astu.edu.et/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBN0t2QWc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--ee708ffab0f55336a1c4748f8643dc39d50e38e8/aman2.png",
   },
 
   // Male Users
   {
-    email: "james.anderson@example.com",
-    fullName: "James Anderson",
-    password: "123456",
-    profilePic: "https://randomuser.me/api/portraits/men/1.jpg",
+    email: "abubeker@gmail.com",
+    fullName: "abubeker",
+    password: "abubeker",
+    profilePic:
+      "https://portal.astu.edu.et/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBMlpIQWc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--8f644524739abb1d1c52a9d50107bb3845ffc05d/Screenshot_20220527-101601_Gallery.jpg",
   },
   {
-    email: "william.clark@example.com",
-    fullName: "William Clark",
-    password: "123456",
-    profilePic: "https://randomuser.me/api/portraits/men/2.jpg",
-  },
-  {
-    email: "benjamin.taylor@example.com",
-    fullName: "Benjamin Taylor",
-    password: "123456",
-    profilePic: "https://randomuser.me/api/portraits/men/3.jpg",
-  },
-  {
-    email: "lucas.moore@example.com",
-    fullName: "Lucas Moore",
-    password: "123456",
-    profilePic: "https://randomuser.me/api/portraits/men/4.jpg",
-  },
-  {
-    email: "henry.jackson@example.com",
-    fullName: "Henry Jackson",
-    password: "123456",
-    profilePic: "https://randomuser.me/api/portraits/men/5.jpg",
-  },
-  {
-    email: "alexander.martin@example.com",
-    fullName: "Alexander Martin",
-    password: "123456",
-    profilePic: "https://randomuser.me/api/portraits/men/6.jpg",
-  },
-  {
-    email: "daniel.rodriguez@example.com",
-    fullName: "Daniel Rodriguez",
-    password: "123456",
-    profilePic: "https://randomuser.me/api/portraits/men/7.jpg",
+    email: "ananiya@gmail.com",
+    fullName: "ananiya",
+    password: "ananiya",
+    profilePic:
+      "https://portal.astu.edu.et/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBMFk4QWc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--9a97e1de622c8a7134e0f9a099371fcadff3ff42/5G5A4000.jpg",
   },
 ];
 
