@@ -112,7 +112,7 @@ export default function Profile() {
               <input
                 type="text"
                 className="input input-bordered w-full pl-10 focus:outline-none focus:ring-2 focus:ring-primary"
-                placeholder="abduselam"
+                placeholder="Your name"
                 value={formData.fullName}
                 onChange={(e) =>
                   setFormData({ ...formData, fullName: e.target.value })
