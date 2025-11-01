@@ -2,6 +2,7 @@
 
 A modern, full-stack real-time chat application built with React, Node.js, and Socket.IO.
 
+Deployed:- https://real-time-chat-app-yp8r.vercel.app/
 ## ✨ Features
 
 - 🔐 **Authentication**: Secure signup/login with JWT
